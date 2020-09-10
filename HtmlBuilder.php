@@ -3,17 +3,15 @@
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Traits\Macroable;
 
-class HtmlBuilder {
-
+class HtmlBuilder
+{
 	use Macroable;
-
 	/**
 	 * The URL generator instance.
 	 *
 	 * @var \Illuminate\Routing\UrlGenerator
 	 */
 	protected $url;
-
 	/**
 	 * Create a new HTML builder instance.
 	 *
@@ -24,7 +22,6 @@ class HtmlBuilder {
 	{
 		$this->url = $url;
 	}
-
 	/**
 	 * Convert an HTML string to entities.
 	 *
@@ -35,7 +32,6 @@ class HtmlBuilder {
 	{
 		return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
 	}
-
 	/**
 	 * Convert entities to HTML characters.
 	 *
@@ -46,7 +42,6 @@ class HtmlBuilder {
 	{
 		return html_entity_decode($value, ENT_QUOTES, 'UTF-8');
 	}
-
 	/**
 	 * Generate a link to a JavaScript file.
 	 *

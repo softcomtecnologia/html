@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Session\Store as Session;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
 
 class FormBuilder {
@@ -94,9 +95,9 @@ class FormBuilder {
 	 */
 	public function open(array $options = array())
 	{
-		$method = array_get($options, 'method', 'post');
+        $method = Arr::get($options, "method", "post");
 
-		// We need to extract the proper method from the attributes. If the method is
+        // We need to extract the proper method from the attributes. If the method is
 		// something other than GET or POST we'll use POST since we will spoof the
 		// actual method since forms don't support the reserved methods in HTML.
 		$attributes['method'] = $this->getMethod($method);
@@ -119,9 +120,7 @@ class FormBuilder {
 		// format the array of attributes. We will also add on the appendage which
 		// is used to spoof requests for this PUT, PATCH, etc. methods on forms.
 		$attributes = array_merge(
-
-			$attributes, array_except($options, $this->reserved)
-
+			$attributes, Arr::except($options, $this->reserved)
 		);
 
 		// Finally, we will concatenate all of the attributes into a single string so
@@ -370,9 +369,9 @@ class FormBuilder {
 		// If the "size" attribute was not specified, we will just look for the regular
 		// columns and rows attributes, using sane defaults if these do not exist on
 		// the attributes array. We'll then return this entire options array back.
-		$cols = array_get($options, 'cols', 50);
+		$cols = Arr::get($options, 'cols', 50);
 
-		$rows = array_get($options, 'rows', 10);
+		$rows = Arr::get($options, 'rows', 10);
 
 		return array_merge($options, compact('cols', 'rows'));
 	}
@@ -909,7 +908,7 @@ class FormBuilder {
 		}
 		elseif (is_array($this->model))
 		{
-			return array_get($this->model, $this->transformKey($name));
+			return Arr::get($this->model, $this->transformKey($name));
 		}
 	}
 
